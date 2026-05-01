@@ -31,14 +31,18 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
+  will-change: transform;
 }
 
 .backdrop {
   background:
     radial-gradient(circle at 78% 18%, rgba(224, 106, 85, 0.08), transparent 20%),
     radial-gradient(circle at 15% 82%, rgba(185, 45, 39, 0.08), transparent 18%);
-  filter: blur(40px);
+  /* Reduced blur for performance and moved to a separate layer */
+  filter: blur(30px);
+  transform: translateZ(0);
   animation: breathe 12s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .cursor-glow {
@@ -46,6 +50,7 @@ body {
     rgba(174, 57, 37, 0.14), transparent 62%);
   opacity: 0.85;
   transition: opacity 0.25s ease;
+  transform: translateZ(0);
 }
 
 .grid-overlay {
@@ -55,12 +60,15 @@ body {
     linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(circle at center, black 45%, transparent 95%);
+  transform: translateZ(0);
 }
 
 .noise {
-  opacity: 0.035;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-  mix-blend-mode: soft-light;
+  /* Removed mix-blend-mode for performance as it's very expensive on full-screen elements */
+  pointer-events: none;
+  transform: translateZ(0);
 }
 
 .page {
@@ -69,6 +77,7 @@ body {
   margin: 0 auto;
   display: grid;
   place-items: center;
+  contain: layout style;
 }
 
 .hero {
@@ -81,11 +90,15 @@ body {
   border-radius: 30px;
   background: var(--panel);
   box-shadow: var(--shadow);
+  /* Keep backdrop-filter but ensure it's on its own layer */
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   animation: rise 700ms ease-out both;
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
 }
 
 .hero:hover {

@@ -1,7 +1,7 @@
 const year = new Date().getFullYear();
 document.title = `SirHumza • ${year}`;
 
-const root = document.documentElement;
+const glow = document.querySelector('.cursor-glow');
 let raf = 0;
 let x = window.innerWidth / 2;
 let y = window.innerHeight / 2;
@@ -29,11 +29,16 @@ window.addEventListener('pointerenter', () => {
 function tick() {
   x += (tx - x) * 0.12;
   y += (ty - y) * 0.12;
-  root.style.setProperty('--mx', `${x}px`);
-  root.style.setProperty('--my', `${y}px`);
+  
+  if (glow) {
+    glow.style.setProperty('--mx', `${x}px`);
+    glow.style.setProperty('--my', `${y}px`);
+  }
+  
   if (Math.abs(tx - x) > 0.5 || Math.abs(ty - y) > 0.5) {
     raf = requestAnimationFrame(tick);
     return;
   }
   raf = 0;
 }
+
