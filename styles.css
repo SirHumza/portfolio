@@ -83,7 +83,8 @@ body {
 .hero {
   width: 100%;
   display: grid;
-  grid-template-columns: 0.92fr 1.08fr;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
   gap: 18px;
   padding: 22px;
   border: 1px solid rgba(255,255,255,0.07);
@@ -117,6 +118,23 @@ body {
   pointer-events: none;
 }
 
+.hero-copy > * {
+  opacity: 0;
+  animation: slideUpFade 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-copy h1 {
+  animation-delay: 150ms;
+}
+
+.hero-copy .line {
+  animation-delay: 300ms;
+}
+
+.hero-copy .links {
+  animation-delay: 450ms;
+}
+
 .eyebrow {
   margin: 0 0 14px;
   color: var(--accent-soft);
@@ -131,7 +149,7 @@ h1 {
   max-width: 5.8ch;
   font-family: "Fraunces", Georgia, serif;
   font-size: clamp(4.2rem, 9.4vw, 8.4rem);
-  line-height: 0.76;
+  line-height: 0.9;
   letter-spacing: -0.075em;
 }
 
@@ -145,7 +163,7 @@ h1 {
 .line {
   margin: 12px 0 0;
   max-width: 32ch;
-  color: rgba(244, 239, 232, 0.58);
+  color: rgba(244, 239, 232, 0.85);
   font-size: 0.9rem;
   line-height: 1.5;
 }
@@ -162,7 +180,7 @@ h1 {
   align-items: center;
   gap: 8px;
   min-height: 42px;
-  padding: 0 14px;
+  padding: 0 16px;
   border-radius: 999px;
   text-decoration: none;
   border: 1px solid rgba(255,255,255,0.1);
@@ -170,7 +188,7 @@ h1 {
   color: var(--text);
   font-size: 0.92rem;
   font-weight: 600;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
 }
 
 .link-btn svg {
@@ -184,6 +202,19 @@ h1 {
   transform: translateY(-1px);
   border-color: rgba(174, 57, 37, 0.32);
   background: rgba(174, 57, 37, 0.08);
+}
+
+.link-btn.primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.link-btn.primary:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--bg);
+  box-shadow: 0 4px 14px rgba(255,255,255,0.2);
 }
 
 .profile {
@@ -260,6 +291,11 @@ h1 {
 
 @keyframes rise {
   from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
