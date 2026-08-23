@@ -278,8 +278,10 @@ async function loadPresence() {
       text = `${verb} ${act.name}`.trim();
     } else if (custom && custom.state) {
       text = custom.state;
+    } else if (data.discord_status === 'offline') {
+      return; // no badge when offline
     } else {
-      text = data.discord_status === 'offline' ? 'Offline' : data.discord_status;
+      text = { online: 'Online', idle: 'Idle', dnd: 'Do not disturb' }[data.discord_status] || data.discord_status;
     }
 
     const dot = document.getElementById('rpc-dot');
