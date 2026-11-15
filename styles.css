@@ -1,13 +1,13 @@
 :root {
   color-scheme: dark;
-  --bg: #07070a;
-  --bg-2: #0b0c10;
+  --bg: #111111;
+  --bg-2: #191919;
   --panel: rgba(14, 15, 19, 0.76);
   --line: rgba(255, 255, 255, 0.08);
-  --text: #f4efe8;
-  --muted: rgba(244, 239, 232, 0.72);
-  --accent: #9e2b25;
-  --accent-soft: #c65a48;
+  --text: #fffdf5;
+  --muted: rgba(255, 253, 245, 0.72);
+  --accent: #b38b2d;
+  --accent-soft: #d5b54c;
   --shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
 }
 
@@ -19,7 +19,7 @@ body {
   color: var(--text);
   font-family: Inter, system-ui, sans-serif;
   background:
-    radial-gradient(circle at 20% 10%, rgba(185, 45, 39, 0.16), transparent 22%),
+    radial-gradient(circle at 20% 10%, rgba(200, 166, 58, 0.12), transparent 22%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
 }
 
@@ -27,7 +27,7 @@ body {
 
 body::-webkit-scrollbar { width: 10px; }
 body::-webkit-scrollbar-track { background: var(--bg); }
-body::-webkit-scrollbar-thumb { background: #2a211e; border-radius: 8px; }
+body::-webkit-scrollbar-thumb { background: #333126; border-radius: 8px; }
 body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 .backdrop,
@@ -41,8 +41,8 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 .backdrop {
   background:
-    radial-gradient(circle at 78% 18%, rgba(224, 106, 85, 0.08), transparent 20%),
-    radial-gradient(circle at 15% 82%, rgba(185, 45, 39, 0.08), transparent 18%);
+    radial-gradient(circle at 78% 18%, rgba(213, 181, 76, 0.08), transparent 20%),
+    radial-gradient(circle at 15% 82%, rgba(200, 166, 58, 0.07), transparent 18%);
 }
 
 /* Small fixed-size layer moved with transform — compositor-only, no repaints. */
@@ -53,7 +53,7 @@ body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
   width: 440px;
   height: 440px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(174, 57, 37, 0.16), transparent 62%);
+  background: radial-gradient(circle, rgba(200, 166, 58, 0.14), transparent 62%);
   opacity: 0.85;
   will-change: transform;
   pointer-events: none;
@@ -165,8 +165,8 @@ h1 {
 .link-btn svg { width: 17px; height: 17px; fill: currentColor; }
 
 .link-btn:hover {
-  border-color: rgba(174, 57, 37, 0.32);
-  background: rgba(174, 57, 37, 0.08);
+  border-color: rgba(200, 166, 58, 0.34);
+  background: rgba(200, 166, 58, 0.08);
 }
 
 /* Shine sweep on the primary pill */
@@ -226,7 +226,7 @@ h1 {
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(174, 57, 37, 0.38), rgba(174, 57, 37, 0.12) 55%, transparent 75%);
+  background: radial-gradient(circle, rgba(200, 166, 58, 0.34), rgba(200, 166, 58, 0.11) 55%, transparent 75%);
   animation: drift 10s ease-in-out infinite;
   pointer-events: none;
 }
@@ -297,7 +297,7 @@ h2 {
   color: var(--muted);
   transition: border-color 180ms ease, color 180ms ease;
 }
-.tags li:hover { border-color: rgba(174, 57, 37, 0.4); color: var(--text); }
+.tags li:hover { border-color: rgba(200, 166, 58, 0.42); color: var(--text); }
 
 .project-grid {
   display: grid;
@@ -323,13 +323,13 @@ h2 {
   position: absolute;
   inset: 0;
   background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(211, 108, 85, 0.13), transparent 65%);
+    rgba(200, 166, 58, 0.12), transparent 65%);
   opacity: 0;
   transition: opacity 250ms ease;
   pointer-events: none;
 }
 .project:hover::before { opacity: 1; }
-.project:hover { transform: translateY(-3px); border-color: rgba(174, 57, 37, 0.35); }
+.project:hover { transform: translateY(-3px); border-color: rgba(200, 166, 58, 0.38); }
 
 .project h3 { margin: 0 26px 8px 0; font-family: "Fraunces", Georgia, serif; font-size: 1.25rem; }
 .project p { margin: 0 0 14px; color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
@@ -475,7 +475,7 @@ html.js .reveal:not(.in) {
   pointer-events: auto;
 }
 
-.to-top:hover { border-color: rgba(174, 57, 37, 0.45); }
+.to-top:hover { border-color: rgba(200, 166, 58, 0.45); }
 
 .to-top svg {
   width: 20px;
