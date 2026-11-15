@@ -231,9 +231,15 @@ async function loadRepos() {
       if (!res.ok) throw new Error(`GitHub API ${res.status}`);
       const data = await res.json();
       repos = data
-        filter((r) => !r.fork && !r.archived && r.name !== 'portfolio' && !r.private)
-        .sort((a, b) => FEATURED_ORDER.indexOf(a.name) - FEATURED_ORDER.indexOf(b.name))
-        .slice(0, 8)
+        .filter((r) => !r.fork && !r.archived && r.name !== 'portfolio' && !r.private)
+        .sort((a, b) => {
+          const ai = FEATURED_ORDER.indexOf(a.name);
+          const bi = FEATURED_ORDER.indexOf(b.name);
+          return (ai < 0 ? FEATURED_ORDER.length : ai) - (bi < 0 ? FEATURED_ORDER.length : bi)
+            || b.stargazers_count - a.stargazers_count
+            || new Date(b.pushed_at) - new Date(a.pushed_at);
+        })
+        .slice(0, 12)
         .map((r) => ({
           name: r.name,
           html_url: r.html_url,
