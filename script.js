@@ -148,7 +148,7 @@ const PROJECT_DESCRIPTIONS = {
   'nanodns-pinger': 'Discord bot diagnosing broken PS4 game presence and guiding members to a fix.',
     'crypto-bot': 'Paper trading with Hermes, Ollama and Yahoo Finance; risk checks are enforced in code, with no broker connection.',
 };
-const FEATURED_ORDER = ['orbisRPC', 'randar-189', 'goldhen-payload-template', 'nanodns-pinger', 'opencode-bigsur', 'crypto-bot'];
+const FEATURED_ORDER = ['orbisRPC', 'randar-189', 'goldhen-payload-template', 'nanodns-pinger' , 'crypto-bot'];
 
 function getCached() {
   try {
