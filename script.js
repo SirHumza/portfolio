@@ -138,8 +138,20 @@ const LANG_COLORS = {
   Rust: '#dea584', Swift: '#F05138', Kotlin: '#A97BFF',
 };
 
-const CACHE_KEY = 'gh-repos-v3';
+const CACHE_KEY = 'gh-repos-v4';
 const CACHE_TTL = 60 * 60 * 1000;
+
+const PROJECT_DESCRIPTIONS = {
+  orbisRPC: 'On-console Discord Rich Presence for jailbroken PS4: game, cover art and timer, with no PC bridge.',
+  'orbis-discord': 'Work in progress native Discord client for PS4, built with C99, SDL2 and OpenOrbis.',
+  'ps4-tailscale': 'Tailscale networking for jailbroken PS4 payloads, with remote access to console services.',
+  'randar-189': 'Minecraft 1.8.9 mod that recovers world RNG and hidden seeds from block drops.',
+  'goldhen-payload-template': 'GoldHEN payload starter with practical build, loading and debugging notes.',
+  'nanodns-pinger': 'Discord bot diagnosing broken PS4 game presence and guiding members to a fix.',
+  'opencode-bigsur': 'Compatibility shim to run the opencode CLI on macOS 11 Big Sur.',
+  'crypto-bot': 'Paper trading with Hermes, Ollama and Yahoo Finance; risk checks are enforced in code, with no broker connection.',
+};
+const FEATURED_ORDER = ['orbisRPC', 'orbis-discord', 'ps4-tailscale', 'randar-189', 'goldhen-payload-template', 'nanodns-pinger', 'opencode-bigsur', 'crypto-bot'];
 
 function getCached() {
   try {
@@ -165,7 +177,7 @@ function buildCard(repo) {
   title.textContent = repo.name;
 
   const desc = document.createElement('p');
-  desc.textContent = repo.description || 'No description yet.';
+  desc.textContent = repo.description || PROJECT_DESCRIPTIONS[repo.name] || 'Project details are in the README.';
 
   const meta = document.createElement('div');
   meta.className = 'meta';
@@ -219,16 +231,15 @@ async function loadRepos() {
       if (!res.ok) throw new Error(`GitHub API ${res.status}`);
       const data = await res.json();
       repos = data
-        .filter((r) => !r.archived && r.name !== 'portfolio')
-        .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
-        .slice(0, 12)
+        filter((r) => !r.fork && !r.archived && r.name !== 'portfolio' && !r.private)
+        .sort((a, b) => FEATURED_ORDER.indexOf(a.name) - FEATURED_ORDER.indexOf(b.name))
+        .slice(0, 8)
         .map((r) => ({
           name: r.name,
           html_url: r.html_url,
-          description: r.description,
+          description: PROJECT_DESCRIPTIONS[r.name] || r.description,
           language: r.language,
           stars: r.stargazers_count,
-          pushed_at: r.pushed_at,
         }));
       try {
         localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), repos }));
@@ -242,7 +253,7 @@ async function loadRepos() {
   if (!repos.length) return;
   grid.replaceChildren(...repos.map(buildCard), moreCard);
   const status = document.getElementById('repo-status');
-  if (status) status.textContent = `${repos.length} public repo${repos.length === 1 ? '' : 's'} · live from GitHub`;
+  if (status) status.textContent = `${repos.length} featured original public projects · live from GitHub`;
 }
 
 loadRepos();
