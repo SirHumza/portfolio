@@ -1,24 +1,18 @@
-<p align="center">
-  <img src="avatar-clean.png" width="96" alt="SirHumza’s ink-sketch cat mascot with a gold monocle" />
-</p>
+# SirHumza · Portfolio
 
-<h1 align="center">SirHumza · Portfolio</h1>
+[Visit the site](https://sirhumza.github.io/portfolio/) · [GitHub profile](https://github.com/SirHumza)
 
-<p align="center">
-  <a href="https://sirhumza.github.io/portfolio/">Live site</a> ·
-  <a href="https://github.com/SirHumza">GitHub profile</a>
-</p>
+An ink, paper, and gold portfolio for console homebrew, game tooling, and experiments. The cleaned cat mascot supplies the visual identity.
 
-A small, static portfolio for my console homebrew, game tooling, and developer utilities.
+## Structure
 
-## Stack
+- `index.html`: accessible navigation, selected public projects, about, clearly attributed forks, and contact.
+- `styles.css`: responsive layout, keyboard focus, and reduced-motion support.
+- `script.js`: current footer year. All page content works without JavaScript.
+- `avatar-clean.png`: mascot artwork.
 
-Vanilla HTML, CSS, and JavaScript. Hosted with GitHub Pages; project cards are loaded from GitHub and limited to original, public, non-archived repositories.
+Projects are deliberately curated in HTML. No API dependency, cached private listings, or generated statistics. Update the project cards when the public selection changes.
 
-## Run locally
+## Local preview
 
-```sh
-python3 -m http.server 8000
-```
-
-Open http://localhost:8000/portfolio/ when serving the parent directory, or http://localhost:8000/ when serving this repository directly.
+From this directory, run `python3 -m http.server 8000` and open http://localhost:8000/.
