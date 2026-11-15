@@ -199,24 +199,9 @@ function buildCard(repo) {
     meta.append(stars);
   }
 
-  if (repo.pushed_at) {
-    const upd = document.createElement('span');
-    upd.className = 'upd';
-    upd.textContent = `updated ${timeAgo(repo.pushed_at)}`;
-    meta.append(upd);
-  }
-
   card.append(arrow, title, desc);
   if (meta.childElementCount) card.append(meta);
   return card;
-}
-
-function timeAgo(dateStr) {
-  const secs = Math.max(1, Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000));
-  if (secs < 3600) return `${Math.floor(secs / 60)}m ago`;
-  if (secs < 86400) return `${Math.floor(secs / 3600)}h ago`;
-  if (secs < 2592000) return `${Math.floor(secs / 86400)}d ago`;
-  return `${Math.floor(secs / 2592000)}mo ago`;
 }
 
 async function loadRepos() {
@@ -231,7 +216,7 @@ async function loadRepos() {
       if (!res.ok) throw new Error(`GitHub API ${res.status}`);
       const data = await res.json();
       repos = data
-        .filter((r) => !r.fork && !r.archived && r.name !== 'portfolio' && !r.private)
+        .filter((r) => !r.fork && !r.archived && r.name !== 'portfolio' && r.name !== 'SirHumza' && !r.private)
         .sort((a, b) => {
           const ai = FEATURED_ORDER.indexOf(a.name);
           const bi = FEATURED_ORDER.indexOf(b.name);
